@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/ms1-usuarios/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms10-ruleta/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms2-social/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms3-eventos/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms4-grupos/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms5-votaciones/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms6-tematicas/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms7-actividades/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms8-consumibles/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms9-asignacion/src/main/java" charset="UTF-8" />
+  </component>
+</project>

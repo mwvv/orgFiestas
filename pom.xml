@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.organizador</groupId>
+    <artifactId>orgFiestas-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Organizador de Fiestas - Proyecto Multi-Módulo</name>
+
+    <modules>
+        <module>ms1-usuarios</module>
+        <module>ms2-social</module>
+        <module>ms3-eventos</module>
+        <module>ms4-grupos</module>
+        <module>ms5-votaciones</module>
+        <module>ms6-tematicas</module>
+        <module>ms7-actividades</module>
+        <module>ms8-consumibles</module>
+        <module>ms9-asignacion</module>
+        <module>ms10-ruleta</module>
+    </modules>
+
+</project>

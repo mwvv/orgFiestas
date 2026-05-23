@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/ms2-social/pom.xml" />
+        <option value="$PROJECT_DIR$/ms4-grupos/pom.xml" />
+        <option value="$PROJECT_DIR$/ms10-ruleta/pom.xml" />
+        <option value="$PROJECT_DIR$/ms3-eventos/pom.xml" />
+        <option value="$PROJECT_DIR$/ms1-usuarios/pom.xml" />
+        <option value="$PROJECT_DIR$/ms6-tematicas/pom.xml" />
+        <option value="$PROJECT_DIR$/ms5-votaciones/pom.xml" />
+        <option value="$PROJECT_DIR$/ms9-asignacion/pom.xml" />
+        <option value="$PROJECT_DIR$/ms7-actividades/pom.xml" />
+        <option value="$PROJECT_DIR$/ms8-consumibles/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_25" default="true" project-jdk-name="24" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
