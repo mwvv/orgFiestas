@@ -1,0 +1,87 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: usuarios
+            uri: lb://usuarios-service
+            predicates:
+              - Path=/api/v1/usuarios/**
+            filters:
+              - AddRequestHeader=X-Gateway-Source, orgFiestas-gateway
+
+          - id: social
+            uri: lb://social-service
+            predicates:
+              - Path=/api/v1/solicitudes/**
+            filters:
+              - AddRequestHeader=X-Gateway-Source, orgFiestas-gateway
+
+          - id: eventos
+            uri: lb://eventos-service
+            predicates:
+              - Path=/api/v1/eventos/**
+            filters:
+              - AddRequestHeader=X-Gateway-Source, orgFiestas-gateway
+
+          - id: grupos
+            uri: lb://grupos-service
+            predicates:
+              - Path=/api/v1/invitaciones/**
+            filters:
+              - AddRequestHeader=X-Gateway-Source, orgFiestas-gateway
+
+          - id: votaciones
+            uri: lb://votaciones-service
+            predicates:
+              - Path=/api/v1/votaciones/**
+            filters:
+              - AddRequestHeader=X-Gateway-Source, orgFiestas-gateway
+
+          - id: tematicas
+            uri: lb://tematicas-service
+            predicates:
+              - Path=/api/v1/tematicas/**
+            filters:
+              - AddRequestHeader=X-Gateway-Source, orgFiestas-gateway
+
+          - id: actividades
+            uri: lb://actividades-service
+            predicates:
+              - Path=/api/v1/actividades/**
+            filters:
+              - AddRequestHeader=X-Gateway-Source, orgFiestas-gateway
+
+          - id: consumibles
+            uri: lb://consumibles-service
+            predicates:
+              - Path=/api/v1/consumibles/**
+            filters:
+              - AddRequestHeader=X-Gateway-Source, orgFiestas-gateway
+
+          - id: asignaciones
+            uri: lb://asignacion-service
+            predicates:
+              - Path=/api/v1/asignaciones/**
+            filters:
+              - AddRequestHeader=X-Gateway-Source, orgFiestas-gateway
+
+          - id: ruleta
+            uri: lb://ruleta-service
+            predicates:
+              - Path=/api/v1/ruleta/**
+            filters:
+              - AddRequestHeader=X-Gateway-Source, orgFiestas-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+  instance:
+    prefer-ip-address: true
