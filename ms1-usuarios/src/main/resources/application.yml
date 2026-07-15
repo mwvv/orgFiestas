@@ -32,6 +32,8 @@ springdoc:
     path: /swagger-ui.html
 
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     eureka-server-http-client-name: RestClient
     register-with-eureka: true

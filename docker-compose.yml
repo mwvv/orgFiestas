@@ -1,0 +1,248 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: orgfiestas-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - orgfiestas-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  eureka-server:
+    build: ./eureka-server
+    container_name: orgfiestas-eureka-server
+    restart: unless-stopped
+    ports:
+      - "8761:8761"
+    environment:
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+      SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED: "false"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - orgfiestas-network
+
+  ms1-usuarios:
+    build: ./ms1-usuarios
+    container_name: orgfiestas-ms1-usuarios
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/usuarios_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+      SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED: "false"
+    depends_on:
+      - eureka-server
+    networks:
+      - orgfiestas-network
+
+  ms2-social:
+    build: ./ms2-social
+    container_name: orgfiestas-ms2-social
+    restart: unless-stopped
+    ports:
+      - "8091:8091"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/social_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+      SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED: "false"
+    depends_on:
+      - eureka-server
+    networks:
+      - orgfiestas-network
+
+  ms3-eventos:
+    build: ./ms3-eventos
+    container_name: orgfiestas-ms3-eventos
+    restart: unless-stopped
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/eventos_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+      SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED: "false"
+    depends_on:
+      - eureka-server
+    networks:
+      - orgfiestas-network
+
+  ms4-grupos:
+    build: ./ms4-grupos
+    container_name: orgfiestas-ms4-grupos
+    restart: unless-stopped
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/grupos_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+      SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED: "false"
+    depends_on:
+      - eureka-server
+    networks:
+      - orgfiestas-network
+
+  ms5-votaciones:
+    build: ./ms5-votaciones
+    container_name: orgfiestas-ms5-votaciones
+    restart: unless-stopped
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/votaciones_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+      SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED: "false"
+    depends_on:
+      - eureka-server
+    networks:
+      - orgfiestas-network
+
+  ms6-tematicas:
+    build: ./ms6-tematicas
+    container_name: orgfiestas-ms6-tematicas
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/tematicas_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+      SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED: "false"
+    depends_on:
+      - eureka-server
+    networks:
+      - orgfiestas-network
+
+  ms7-actividades:
+    build: ./ms7-actividades
+    container_name: orgfiestas-ms7-actividades
+    restart: unless-stopped
+    ports:
+      - "8087:8087"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/actividades_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+      SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED: "false"
+    depends_on:
+      - eureka-server
+    networks:
+      - orgfiestas-network
+
+  ms8-consumibles:
+    build: ./ms8-consumibles
+    container_name: orgfiestas-ms8-consumibles
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/consumibles_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+      SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED: "false"
+    depends_on:
+      - eureka-server
+    networks:
+      - orgfiestas-network
+
+  ms9-asignacion:
+    build: ./ms9-asignacion
+    container_name: orgfiestas-ms9-asignacion
+    restart: unless-stopped
+    ports:
+      - "8089:8089"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/asignacion_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+      SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED: "false"
+    depends_on:
+      - eureka-server
+    networks:
+      - orgfiestas-network
+
+  ms10-ruleta:
+    build: ./ms10-ruleta
+    container_name: orgfiestas-ms10-ruleta
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ruleta_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+      SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED: "false"
+    depends_on:
+      - eureka-server
+    networks:
+      - orgfiestas-network
+
+  gateway:
+    build: ./gateway
+    container_name: orgfiestas-gateway
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+      SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED: "false"
+    depends_on:
+      - eureka-server
+      - ms1-usuarios
+      - ms2-social
+      - ms3-eventos
+      - ms4-grupos
+      - ms5-votaciones
+      - ms6-tematicas
+      - ms7-actividades
+      - ms8-consumibles
+      - ms9-asignacion
+      - ms10-ruleta
+    networks:
+      - orgfiestas-network
+
+networks:
+  orgfiestas-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
