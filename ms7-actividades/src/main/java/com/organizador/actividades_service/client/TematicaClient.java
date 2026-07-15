@@ -3,6 +3,7 @@ package com.organizador.actividades_service.client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import java.util.Map;
@@ -13,6 +14,7 @@ public class TematicaClient {
     private static final Logger log = LoggerFactory.getLogger(TematicaClient.class);
 
     @Autowired
+    @Qualifier("loadBalancedWebClientBuilder")
     private WebClient.Builder webClientBuilder;
 
     public String obtenerNombreTematica(Integer tematicaId) {
